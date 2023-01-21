@@ -1,0 +1,31 @@
+.main{
+    width: 1080px;
+    height: 1080px;
+    border: 2px solid black;
+    text-align: center;
+    background-color: #1A1110;
+    font-style: italic;
+}
+.content{
+    border: 2px solid rgb(205, 185, 185);
+    margin-top: 33%;
+    
+}
+.quote{
+    border: 2px solid rgb(249, 65, 65);
+    /* margin-top: 22vh; */
+    font-size: 42px;
+    color: #f8eecc;
+}
+.author{
+    border: 2px solid rgb(249, 65, 65);
+    margin-top: 5vh;
+    font-size: 28px;
+    color: #f8eecc;
+}
+.source{
+    border: 2px solid rgb(20, 8, 8);
+    margin-top: 2vh;
+    font-size: 27px;
+    color: #f8eecc;
+}

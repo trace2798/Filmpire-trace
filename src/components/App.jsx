@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
-import { Actors, MovieInformation, Movies, NavBar, Profile} from './'
+import { Actors, MovieInformation, Movies, NavBar, Profile, Post} from './'
 import useStyles from './styles';
 
 const App = () => {
@@ -16,6 +16,7 @@ return(
             <Route exact path='/actors/:id' element={<Actors/>}/>
             <Route exact path='/' element={<Movies/>}/>
             <Route exact path='/profile/:id' element={<Profile/>}/>
+            {/* <Route exact path='/insta' element={<Post/>}/> */}
         </Routes>
     </main>
   </div>

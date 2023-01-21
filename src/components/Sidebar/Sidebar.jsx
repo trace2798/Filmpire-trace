@@ -5,6 +5,8 @@ import { useTheme} from '@mui/styles'
 import { useGetGenresQuery } from "../../services/TMDB";
 import useStyles from './styles'
 import genreIcons from '../../assets/genres'
+import { useDispatch, useSelector } from "react-redux";
+import { selectGenreOrCategory }  from "../../features/currentGenreOrCategory";
 
 const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
 const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
@@ -16,13 +18,17 @@ const categories = [
   ];
 
 
-
 //it will accept one prop which we are passing it from Navbar (setMobileOpen) which we need to destructure.
 const Sidebar = ({ setMobileOpen }) => {
     const theme = useTheme();
     const classes = useStyles();
-    const { data, isFetching} = useGetGenresQuery();
-    console.log(data);
+    const { data, isFetching } = useGetGenresQuery();
+    //it will allow us to dispatch action
+    const dispatch = useDispatch();
+    
+    const {genreIdOrCategoryName} = useSelector((state) => state.currentGenreOrCategory);
+    
+
   return (
     <>
     <Link to="/" className={classes.imageLink}>
@@ -30,7 +36,6 @@ const Sidebar = ({ setMobileOpen }) => {
         className={classes.image}
         src={theme.palette.mode === 'light' ? redLogo : blueLogo}
         alt='Filmpire logo'
-    
     />
     </Link>
     <Divider/>
@@ -40,7 +45,7 @@ const Sidebar = ({ setMobileOpen }) => {
         </ListSubheader> 
         {categories.map(({label, value}) => (
             <Link key={value} className={classes.links} to="/">
-                <ListItem onClick={() => {}} button>
+                <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
                     <ListItemIcon>
                         <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
                     </ListItemIcon>
@@ -58,7 +63,7 @@ const Sidebar = ({ setMobileOpen }) => {
       </Box>
     ) : data.genres.map(({name, id}) => (
             <Link key={id} className={classes.links} to="/">
-                <ListItem onClick={() => {}} button>
+                <ListItem onClick={() => dispatch(selectGenreOrCategory(id))} button>
                     <ListItemIcon>
                         <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                     </ListItemIcon>
@@ -71,3 +76,5 @@ const Sidebar = ({ setMobileOpen }) => {
 }
 
 export default Sidebar
+
+//To set movie by genre we have to use the onClick set up above.To make it work we have to use a part of redux without redux toolkit. We have to dispatch a real action call and then that action is going to change the id of the movie category we want to see. 
