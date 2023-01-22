@@ -23,6 +23,5 @@ export const genreOrCategory = createSlice({
 })
 
 export const { selectGenreOrCategory, searchMovie } = genreOrCategory.actions;
-
 export default genreOrCategory.reducer;
 //whenever we have a reducer we need to attach it to the store(folder.app=>store.js)
