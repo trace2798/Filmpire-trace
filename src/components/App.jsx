@@ -16,7 +16,7 @@ return(
             <Route exact path='/actors/:id' element={<Actors/>}/>
             <Route exact path='/' element={<Movies/>}/>
             <Route exact path='/profile/:id' element={<Profile/>}/>
-            {/* <Route exact path='/insta' element={<Post/>}/> */}
+            <Route exact path='/insta' element={<Post/>}/> 
         </Routes>
     </main>
   </div>

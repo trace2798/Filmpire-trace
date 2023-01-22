@@ -3,12 +3,12 @@
     height: 1080px;
     border: 2px solid black;
     text-align: center;
-    background-color: #1A1110;
+    background-color: hsl(6, 24%, 8%);
     font-style: italic;
 }
 .content{
     border: 2px solid rgb(205, 185, 185);
-    margin-top: 33%;
+    margin-top: 32.5%;
     
 }
 .quote{
@@ -28,4 +28,17 @@
     margin-top: 2vh;
     font-size: 27px;
     color: #f8eecc;
+}
+
+.main2{
+    width: 1080px;
+    height: 1080px;
+    border: 2px solid black;
+    text-align: center;
+    background-color: #BDB5D5;
+    font-style: italic;
+}
+.white{
+    background-color: beige;
+    height: 216px;
 }
