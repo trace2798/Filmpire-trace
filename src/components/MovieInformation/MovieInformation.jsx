@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Modal, Typography, Button, ButtonGroup, CircularProgress, Grid, Box, useMediaQuery, Rating } from '@mui/material'
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorder, Remove, ArrowBack, FavoriteBorderOutlined } from '@mui/icons-material'
 import { Link, useParams } from 'react-router-dom'
@@ -14,6 +14,7 @@ import { MovieList } from '../index';
 const MovieInformation = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   //we will use usePrams to get the movie id
   const { id } = useParams();
 
@@ -156,6 +157,24 @@ const MovieInformation = () => {
           ? <MovieList movies={recommendations} numberOfMovies={12} />
           : <Box>Sorry, nothing was found.</Box>} 
       </Box>
+      {console.log('data video', data.videos)}
+      <Modal
+        closeAfterTransition
+        className={classes.modal}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data.videos.results.length > 0 && (
+          <iframe
+          autoPlay
+          className={classes.video}
+          frameBorder="0"
+          title="Trailer"
+          src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+          allow="autoplay"
+          />
+        )}
+      </Modal>
 
     </Grid>
   )
