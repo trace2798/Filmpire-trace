@@ -1,19 +1,21 @@
 //My solution and solution is showing expected results.
 
-import React from 'react'
+import React, {useState} from 'react'
 import { useGetActorInformationQuery, useGetMovieByActorNameQuery } from '../../services/TMDB';
 import useStyles from './styles'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Modal, Typography, Button, ButtonGroup, CircularProgress, Grid, Box, useMediaQuery, Rating } from '@mui/material'
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorder, Remove, ArrowBack, FavoriteBorderOutlined } from '@mui/icons-material'
-import { MovieList } from '../index';
+import { MovieList, Pagination } from '../index';
 
 
 const Actors = () => {
     const classes = useStyles();
     const {id} = useParams();
+    const navigate = useNavigate();
+    const [page, setPage] = useState(1);
     const { data, error, isFetching } = useGetActorInformationQuery(id);
-    const { data: movieList, isFetching: isFetchingMovieList} = useGetMovieByActorNameQuery({ list: 'discover', person_id: id});
+    const { data: movieList, isFetching: isFetchingMovieList} = useGetMovieByActorNameQuery({person_id: id, page});
   
     if (isFetching) {
       return (
@@ -73,10 +75,10 @@ const Actors = () => {
             </Grid>
             <Grid item xs={12} sm={6} className={classes.buttonContainer}>
               <ButtonGroup size="small" variant="text">
-                <Button startIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
-                  <Typography variant="subtitle2" component={Link} to="/" color="inherit" sx={{ textDecoration: 'none' }}>
+                <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} sx={{ borderColor: 'primary.main' }}>
+                  
                     Back
-                  </Typography>
+                  
                 </Button>
               </ButtonGroup>
             </Grid>
@@ -94,6 +96,7 @@ const Actors = () => {
           : <Box>Sorry, nothing was found.</Box>
         } 
       </Box>
+      <Pagination currentPage={page} setPage={setPage} totalPages={movieList?.total_pages}/>
     </Grid>
   )
 }
