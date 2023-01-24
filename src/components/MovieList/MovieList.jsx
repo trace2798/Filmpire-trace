@@ -14,6 +14,9 @@ const MovieList = ({ movies, numberOfMovies}) => {
         {movies.results.slice(0, numberOfMovies).map((movie, i) => (
             <Movie key={i} movie={movie} i={i}/>
         ))}
+        {/* {movies.cast.slice(0, numberOfMovies).map((movie, i) => (
+            <Movie key={i} movie={movie} i={i}/>
+        ))} */}
     </Grid>
   )
 }

@@ -45,12 +45,24 @@ export const tmdbApi = createApi({
     getMovieRecommendation: builder.query({
       query: ({movie_id, list}) => {
       return `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`;
-      //  return `/movie/${movie_id}/recommendations?api_key=${tmdbApiKey}`;
+      }
+    }),
+    //Get actor information
+    getActorInformation: builder.query({
+      query: (id) => {
+        return `/person/${id}?api_key=${tmdbApiKey}`;
+      }
+    }),
+    //Get movie by actor name
+    getMovieByActorName: builder.query({
+      query: ({person_id, list}) => {
+        // return `/person/${person_id}/${list}?api_key=${tmdbApiKey}`;
+        return `/${list}/movie?api_key=${tmdbApiKey}&with_cast=${person_id}`;
       }
     })
   }),
 });
 
-export const { useGetMoviesQuery, useGetGenresQuery, useGetMovieInformationQuery, useGetMovieRecommendationQuery } = tmdbApi;
+export const { useGetMoviesQuery, useGetGenresQuery, useGetMovieInformationQuery, useGetMovieRecommendationQuery, useGetActorInformationQuery, useGetMovieByActorNameQuery } = tmdbApi;
 
 //"typeof" term is important, without it the if statements were not working. 

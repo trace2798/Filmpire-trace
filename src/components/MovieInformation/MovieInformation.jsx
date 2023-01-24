@@ -50,21 +50,10 @@ const MovieInformation = () => {
       </h4>
       ) 
   }
-  // if (!data.id) {
-  //   return (
-  //     <Box display="flex" alignItems="center" mt="20px">
-  //       <Typography variant="h4">
-  //         No Movies that match that name
-  //         <br />
-  //         Please search for something else.
-  //       </Typography>
-  //     </Box>
-  //   );
-  // }
-
+  
   if (error) return "An error occurred";
   
-  console.log('recommendation:', recommendations);
+  console.log('Recommendation:', recommendations);
   return (
     <Grid container className={classes.containerSpaceAround}>
       {/* {data.overview} */}
