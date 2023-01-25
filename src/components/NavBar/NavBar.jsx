@@ -16,11 +16,13 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Sidebar, Search } from "..";
 import { fetchToken, createSessionID, moviesApi } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
+import { ColorModeContext } from "../../utils/ToggleColorMode";
 import { setUser, userSelector } from "../../features/auth";
+ 
 
 const NavBar = () => {
   const { isAuthenticated, user } = useSelector(userSelector)
@@ -30,6 +32,7 @@ const NavBar = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
   const dispatch = useDispatch(); 
+  const colorMode = useContext(ColorModeContext);
   // const isAuthenticated = false;
   console.log('Navbar User',user);
 
@@ -50,7 +53,7 @@ const NavBar = () => {
             `account?session_id=${sessionIdFromLocalStorage}`
           );
           dispatch(setUser(userData));
-          console.log('Navbar here',userData.id, userData.username);
+          console.log('Navbar here from NavBar:',userData.id, userData.username);
         } else {
           const sessionId = await createSessionID();
           const { data: userData } = await moviesApi.get(
@@ -81,7 +84,7 @@ const NavBar = () => {
               <Menu />
             </IconButton>
           )}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && <Search />}
@@ -98,7 +101,7 @@ const NavBar = () => {
                 className={classes.linkButton}
                 onClick={() => {}}
               >
-                {!isMobile && <>My Movies &nbsp;</>}
+                {!isMobile && <>{user.username} &nbsp;</>}
                 <Avatar
                   style={{ width: 30, height: 30 }}
                   alt="Profile"

@@ -9,3 +9,4 @@ export { default as Movie } from './Movie/Movie';
 export { default as Post} from './insta/Post';
 export { default as Search } from './Search/Search.jsx';
 export { default as Pagination } from './Pagination/Pagination.jsx';
+export { default as RatedCards } from './RatedCards/RatedCards.jsx';

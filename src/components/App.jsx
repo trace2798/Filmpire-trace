@@ -15,6 +15,7 @@ return(
             <Route exact path='/movie/:id' element={<MovieInformation/>}/>
             <Route exact path='/actors/:id' element={<Actors/>}/>
             <Route exact path='/' element={<Movies/>}/>
+            <Route exact path='/approved' element={<Movies/>}/>
             <Route exact path='/profile/:id' element={<Profile/>}/>
             <Route exact path='/insta' element={<Post/>}/> 
         </Routes>
