@@ -8,14 +8,15 @@ import genreIcons from '../../assets/genres'
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory }  from "../../features/currentGenreOrCategory";
 
-const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
-const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
+const blueLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
+const redLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
 
 const categories = [
     { label: 'Popular', value: 'popular' },
     { label: 'Top Rated', value: 'top_rated' },
     { label: 'Upcoming', value: 'upcoming' },
   ];
+
 
 
 //it will accept one prop which we are passing it from Navbar (setMobileOpen) which we need to destructure.
@@ -26,7 +27,13 @@ const Sidebar = ({ setMobileOpen }) => {
     //it will allow us to dispatch action
     const dispatch = useDispatch();
     
+
     const {genreIdOrCategoryName} = useSelector((state) => state.currentGenreOrCategory);
+     
+    useEffect(() => {
+        setMobileOpen(false);
+        }, [genreIdOrCategoryName]);
+
     
 
   return (
@@ -34,7 +41,7 @@ const Sidebar = ({ setMobileOpen }) => {
     <Link to="/" className={classes.imageLink}>
     <img
         className={classes.image}
-        src={theme.palette.mode === 'light' ? redLogo : blueLogo}
+        src={theme.palette.mode === 'light' ? blueLogo : redLogo}
         alt='Filmpire logo'
     />
     </Link>
